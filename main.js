@@ -9,46 +9,60 @@ var loadImage = (src, callback) => {
     img.src=src;
 }
 
-let imagePath = (frameNumber) => {
+let imagePath = (frameNumber, animation) => {
 
-    return "./images/idle/"+frameNumber +".png";
+    return "./images/"+animation+"/"+frameNumber +".png";
 }
 
+let frames = {
+
+    idle : [1,2,3,4,5,6,7,8],
+    kick : [1,2,3,4,5,6,7],
+    punch : [1,2,3,4,5,6,7],
+   // idle = [1,2,3,4,5,6,7,8],
+
+};
+
 let loadImages = (callback) =>{
-    let images = [];
-    let imagesToLoad = 8;
+    let images = {idle:[],kick:[],punch:[]};
+    let imagesToLoad = 0;
 
-    [1,2,3,4,5,6,7,8].forEach((frameNumber)=>{
-        let path = imagePath(frameNumber);
-    
+    ["idle","kick", "punch"].forEach((animation)=>{
+        let animationFrames = frames[animation];
+        imagesToLoad = imagesToLoad + animationFrames.length;
 
-    loadImage(path, (image) =>{
-      images[frameNumber - 1] = image;
-      imagesToLoad = imagesToLoad -1;
+        animationFrames.forEach((frameNumber)=>{
+               let path = imagePath(frameNumber,animation);
+               loadImage(path, (image) =>{
+               images[animation][frameNumber - 1] = image;
+               imagesToLoad = imagesToLoad -1;
 
-      if(imagesToLoad === 0){
-          callback(images);
-      }
+               if(imagesToLoad === 0){
+               callback(images);
+               }
+        })
+
+        
     })
 
 });
 }
 
 
-let animate = (ctx, images, callback) =>{
+let animate = (ctx, images,animation, callback) =>{
 
-    images.forEach((image, index)=>{
+    images[animation].forEach((image, index)=>{
       setTimeout(()=>{
         ctx.clearRect(0, 0, 500, 500);
         ctx.drawImage(image, 0, 0, 500,500);
       }, index*100);
     });
-    setTimeout(callback, images.length*100);
+    setTimeout(callback, images[animation].length*100);
 };
 
 
 loadImages((images)=>{
-      animate(ctx,images,()=>{
+      animate(ctx,images,"punch",()=>{
        console.log("Done!");
       });
 });
