@@ -24,10 +24,11 @@ canvas{
  margin-top: 10px;
  margin-right: 10px;
  height: 40px;
- width: 60px;
+ padding:10px;
  z-index: 1;
  border: none;
- border-radius: 15%;
+ font-family: Helvetica;
+ font-weight: 600;
 }
 #kick:active{
     
@@ -39,10 +40,10 @@ canvas{
     margin-top: 10px;
     margin-right: 10px;
     height: 40px;
-    width: 60px;
     z-index: 1;
     border: none;
-    border-radius: 15%;
+    font-family: Helvetica;
+    font-weight: 600;
 }
 #punch:active{
     
