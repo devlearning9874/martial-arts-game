@@ -9,12 +9,32 @@ var loadImage = (src, callback) => {
     img.src=src;
 }
 
-let imagePath = (framedNumber) => {
+let imagePath = (frameNumber) => {
 
-    return "./images/idle/"+framedNumber +".png";
+    return "./images/idle/"+frameNumber +".png";
+}
+
+let loadImages = (callback) =>{
+    let images = [];
+    let imagesToLoad = 8;
+
+    [1,2,3,4,5,6,7,8].forEach((frameNumber)=>{
+        let path = imagePath(frameNumber);
+    
+
+    loadImage(path, (image) =>{
+      images[frameNumber - 1] = image;
+      imagesToLoad = imagesToLoad -1;
+
+      if(imagesToLoad === 0){
+          callback(images);
+      }
+    })
+
+});
 }
 
 
-loadImage(imagePath(2), (img)=>ctx.drawImage(img, 0, 0, 500,500));
+loadImages((images)=>ctx.drawImage(images[3], 0, 0, 500,500));
 
 
