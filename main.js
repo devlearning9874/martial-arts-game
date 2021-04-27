@@ -17,8 +17,8 @@ let frames = {
   idle: [1, 2, 3, 4, 5, 6, 7, 8],
   kick: [1, 2, 3, 4, 5, 6, 7],
   punch: [1, 2, 3, 4, 5, 6, 7],
-  backward: [1,2,3,4,5,6],
-  forward: [1,2,3,4,5,6]
+  backward: [1, 2, 3, 4, 5, 6],
+  forward: [1, 2, 3, 4, 5, 6],
 };
 
 let loadImages = (callback) => {
@@ -90,10 +90,10 @@ loadImages((images) => {
       queuedAnimation.push("forward");
     } else if (key === "ArrowLeft") {
       queuedAnimation.push("backward");
-    } else if (key === "ArrowUp"){
-        queuedAnimation.push("punch");
-    } else if (key === "ArrowDown"){
-        queuedAnimation.push("kick");
-    } 
+    } else if (key === "ArrowUp") {
+      queuedAnimation.push("punch");
+    } else if (key === "ArrowDown") {
+      queuedAnimation.push("kick");
+    }
   });
 });
